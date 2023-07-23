@@ -71,10 +71,9 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
     event.preventDefault();
   } else {
-    alert("Make sure to enter valid information for each field!");
+    window.alert("Make sure to enter valid information for each field!");
     event.preventDefault();
   }
-  // return;
 
 // Using the input values, update the shuttle requirements.
 }
