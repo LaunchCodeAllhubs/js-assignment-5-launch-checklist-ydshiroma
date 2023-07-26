@@ -78,6 +78,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     let launchStatus = document.getElementById("launchStatus");
 
     if (launchReady == true) {
+      document.querySelector("div[id=faultyItems]").style.visibility = "hidden";
       launchStatus.innerHTML = "Shuttle is ready for launch";
       launchStatus.style.color = "#419F6A";
     } else {
