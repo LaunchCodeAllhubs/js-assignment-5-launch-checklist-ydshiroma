@@ -3,6 +3,18 @@ require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
    // Here is the HTML formatting for our mission target div.
+   let missionTarget = document.getElementById("missionTarget");
+   missionTarget.innerHTML = `
+   <h2>Mission Destination</h2>
+   <ol>
+       <li>Name: ${name}</li>
+       <li>Diameter: ${diameter}</li>
+       <li>Star: ${star}</li>
+       <li>Distance from Earth: ${distance}</li>
+       <li>Number of Moons: ${moons}</li>
+   </ol>
+   <img src="${imageUrl}">
+   `;
    /*
                 <h2>Mission Destination</h2>
                 <ol>
@@ -37,6 +49,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
   if (correctValues.pilot == validateInput(pilot.value) && correctValues.copilot == validateInput(copilot.value) && correctValues.fuelLevel == validateInput(fuelLevel.value) && correctValues.cargoLevel == validateInput(cargoLevel.value)) {
     document.querySelector("div[id=faultyItems]").style.visibility = "visible";
+    // hide this if checklist is ready to go?
+    // what is variable 'list' supposed to do?
 
     document.getElementById("pilotStatus").innerHTML = `Pilot ${pilot.value} is ready for launch`;
     document.getElementById("copilotStatus").innerHTML = `Copilot ${copilot.value} is ready for launch`
@@ -79,15 +93,30 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 }
 
 async function myFetch() {
-    let planetsReturned;
+    let planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json");
+    let data = await planetsReturned.json();
+    console.log("data: " + data);
+    return data;
 
-    planetsReturned = await fetch().then( function(response) {
-        });
+    // .then( function(response) {
+    //   response.json().then(function(json) {
+    //     console.log("response" + response);
+    //     console.log("JSON: " + json);
+        // return response;
+      // });
+        // });
 
     return planetsReturned;
 }
 
 function pickPlanet(planets) {
+  console.log("planets: " + planets);
+  // let data = planets.json();
+  let planetIndex = Math.floor(Math.random() * planets.length);
+  console.log(planetIndex);
+  return planets[planetIndex];
+  // addDestinationInfo(document, planet.name, planet.diameter, planet.star, planet.distance, planet.moons, planet.imageUrl);
+  // return planets[planetIndex];
 }
 
 module.exports.addDestinationInfo = addDestinationInfo;
