@@ -48,7 +48,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
   }
 
   if (correctValues.pilot == validateInput(pilot.value) && correctValues.copilot == validateInput(copilot.value) && correctValues.fuelLevel == validateInput(fuelLevel.value) && correctValues.cargoLevel == validateInput(cargoLevel.value)) {
-    document.querySelector("div[id=faultyItems]").style.visibility = "visible";
+    // document.querySelector("div[id=faultyItems]").style.visibility = "visible";
     // hide this if checklist is ready to go?
     // what is variable 'list' supposed to do?
 
@@ -59,6 +59,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
     if ( Number(fuelLevel.value) < 10000) {
       // Fuel level too low for launch
+      document.querySelector("div[id=faultyItems]").style.visibility = "visible";
       document.getElementById("fuelStatus").innerHTML = "Fuel level too low for launch";
       launchReady = false;
     } else {
@@ -67,6 +68,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
     if ( Number(cargoLevel.value) > 10000) {
       // Cargo mass too heavy for launch
+      document.querySelector("div[id=faultyItems]").style.visibility = "visible";
       document.getElementById("cargoStatus").innerHTML = "Cargo mass too heavy for launch";
       launchReady = false;
     } else {
